@@ -7,6 +7,7 @@ void main() {
 
 final _appRouter = AppRouter();
 
+//Hola mundo
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
