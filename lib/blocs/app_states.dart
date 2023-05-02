@@ -10,6 +10,11 @@ class EquipoLoadingState extends EquipoState {
   List<Object?> get props => [];
 }
 
+class EquipoLoading extends EquipoState {
+  @override
+  List<Object?> get props => [];
+}
+
 class EquipoLoadedState extends EquipoState {
   final List<Equipo> equipos;
   EquipoLoadedState(this.equipos);

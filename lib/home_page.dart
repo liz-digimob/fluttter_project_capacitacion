@@ -8,6 +8,8 @@ import 'model/equipo.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_flutter_api/route/routes.gr.dart';
 
+import 'ui/constantes.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -31,13 +33,13 @@ class HomePage extends StatelessWidget {
       )..add(LoadUserEvent()),
       child: BlocBuilder<UserBloc, EquipoState>(
         builder: (context, state) {
-          if (state is EquipoLoadingState) {
+          if (state is EquipoLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           if (state is EquipoErrorState) {
-            return const Center(child: Text("Error"));
+            return Center(child: Text(state.error));
           }
           if (state is EquipoLoadedState) {
             List<Equipo> userList = state.equipos;
@@ -51,7 +53,7 @@ class HomePage extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                           child: ListTile(
                               title: Text(
-                                '${userList[index].nombreEquipo}  ${userList[index].grupo}',
+                                '${userList[index].nombreEquipo}  ${userList[index].puntos}',
                                 style: const TextStyle(color: Colors.white),
                               ),
                               subtitle: Text(
@@ -60,7 +62,8 @@ class HomePage extends StatelessWidget {
                               ),
                               leading: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                    userList[index].fotoEquipo.toString()),
+                                    RESOURCE_IMAGES_LOGO +
+                                        userList[index].fotoEquipo.toString()),
                               ),
                               onTap: () {
                                 AutoRouter.of(context).push(
